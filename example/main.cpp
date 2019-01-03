@@ -39,5 +39,7 @@ int main(void) {
   dispatcher->terminate();
   dispatcher = nullptr;
 
+  std::cout << "finished" << std::endl;
+
   return 0;
 }
