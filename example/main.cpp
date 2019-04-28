@@ -11,6 +11,22 @@ int main(void) {
     global_wait->notify();
   });
 
+  // ============================================================
+  // attributes
+
+  if (auto session_id = pqrs::osx::session::find_caller_security_session()) {
+    std::cout << "session_id: " << *session_id << std::endl;
+    if (auto attributes = pqrs::osx::session::find_attributes(*session_id)) {
+      std::cout << "  attributes.is_root " << attributes->get_is_root() << std::endl;
+      std::cout << "  attributes.has_graphic_access " << attributes->get_has_graphic_access() << std::endl;
+      std::cout << "  attributes.has_tty " << attributes->get_has_tty() << std::endl;
+      std::cout << "  attributes.is_remote " << attributes->get_is_remote() << std::endl;
+    }
+  }
+
+  // ============================================================
+  // monitor
+
   auto time_source = std::make_shared<pqrs::dispatcher::hardware_time_source>();
   auto dispatcher = std::make_shared<pqrs::dispatcher::dispatcher>(time_source);
 

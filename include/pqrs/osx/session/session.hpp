@@ -4,6 +4,7 @@
 // Distributed under the Boost Software License, Version 1.0.
 // (See http://www.boost.org/LICENSE_1_0.txt)
 
+#include "attributes.hpp"
 #include <SystemConfiguration/SystemConfiguration.h>
 #include <optional>
 
@@ -18,6 +19,24 @@ inline std::optional<uid_t> find_console_user_id(void) {
   }
 
   return std::nullopt;
+}
+
+inline std::optional<SecuritySessionId> find_caller_security_session(void) {
+  SecuritySessionId id = 0;
+  SessionAttributeBits attributes = 0;
+  if (SessionGetInfo(callerSecuritySession, &id, &attributes) != errSessionSuccess) {
+    return std::nullopt;
+  }
+  return id;
+}
+
+inline std::optional<attributes> find_attributes(SecuritySessionId session_id) {
+  SecuritySessionId id = 0;
+  SessionAttributeBits bits = 0;
+  if (SessionGetInfo(session_id, &id, &bits) != errSessionSuccess) {
+    return std::nullopt;
+  }
+  return attributes(bits);
 }
 } // namespace session
 } // namespace osx
