@@ -25,6 +25,30 @@ int main(void) {
   }
 
   // ============================================================
+  // cg
+
+  if (auto attributes = pqrs::osx::session::find_cg_session_current_attributes()) {
+    std::cout << "current_attributes: " << std::endl;
+    if (auto& v = attributes->get_console_set()) {
+      std::cout << "  console_set: " << *v << std::endl;
+    }
+    if (auto& v = attributes->get_login_done()) {
+      std::cout << "  login_done: " << *v << std::endl;
+    }
+    if (auto& v = attributes->get_on_console()) {
+      std::cout << "  on_console: " << *v << std::endl;
+    }
+    if (auto& v = attributes->get_user_id()) {
+      std::cout << "  user_id: " << *v << std::endl;
+    }
+    if (auto& v = attributes->get_user_name()) {
+      std::cout << "  user_name: " << *v << std::endl;
+    }
+  } else {
+    std::cout << "cg_session_current_attributes: std::nullopt" << std::endl;
+  }
+
+  // ============================================================
   // monitor
 
   auto time_source = std::make_shared<pqrs::dispatcher::hardware_time_source>();

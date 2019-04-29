@@ -19,6 +19,7 @@ add_executable(
 target_link_libraries(
   example
   "-framework CoreFoundation"
+  "-framework CoreGraphics"
   "-framework Security"
   "-framework SystemConfiguration"
 )
