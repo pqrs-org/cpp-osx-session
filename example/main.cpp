@@ -56,14 +56,8 @@ int main(void) {
 
   auto monitor = std::make_shared<pqrs::osx::session::monitor>(dispatcher);
 
-  monitor->console_user_id_changed.connect([](auto&& console_user_id) {
-    std::cout << "console_user_id_changed (console_user_id:";
-    if (console_user_id) {
-      std::cout << *console_user_id;
-    } else {
-      std::cout << "empty";
-    }
-    std::cout << ")" << std::endl;
+  monitor->on_console_changed.connect([](auto&& on_console) {
+    std::cout << "on_console_changed: " << on_console << std::endl;
   });
 
   monitor->async_start(std::chrono::milliseconds(1000));
