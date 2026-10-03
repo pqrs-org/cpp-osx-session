@@ -26,8 +26,8 @@ public:
 
   monitor(const monitor&) = delete;
 
-  explicit monitor(std::weak_ptr<dispatcher::dispatcher> weak_dispatcher) : dispatcher_client(weak_dispatcher),
-                                                                            timer_(*this) {
+  explicit monitor(std::weak_ptr<dispatcher::dispatcher> weak_dispatcher)
+      : dispatcher_client(weak_dispatcher) {
     dispatcher_client_constructor_exception_guard_.initialize();
   }
 
@@ -64,7 +64,8 @@ public:
 
 private:
   std::optional<bool> on_console_;
+
   // Construct after potentially throwing members; destruction requires detach.
-  dispatcher::extra::timer timer_;
+  dispatcher::extra::timer timer_{*this};
 };
 } // namespace pqrs::osx::session
