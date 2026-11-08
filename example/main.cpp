@@ -1,5 +1,6 @@
 #include <csignal>
 #include <iostream>
+#include <pqrs/osx/autorelease_pool.hpp>
 #include <pqrs/osx/session.hpp>
 
 namespace {
@@ -39,7 +40,9 @@ int main() {
   // monitor
 
   auto time_source = std::make_shared<pqrs::dispatcher::hardware_time_source>();
-  auto dispatcher = std::make_shared<pqrs::dispatcher::dispatcher>(time_source);
+  auto dispatcher = std::make_shared<pqrs::dispatcher::dispatcher>(
+      time_source,
+      pqrs::osx::autorelease_pool::execute_with_autorelease_pool);
 
   auto monitor = std::make_shared<pqrs::osx::session::monitor>(dispatcher);
 
