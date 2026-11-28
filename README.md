@@ -11,6 +11,7 @@ cpp-osx-session depends the following classes.
 
 - [Nod](https://github.com/fr00b0/nod)
 - [pqrs::cf::boolean](https://github.com/pqrs-org/cpp-cf-boolean)
+- [pqrs::cf::cf_ptr](https://github.com/pqrs-org/cpp-cf-cf_ptr)
 - [pqrs::cf::number](https://github.com/pqrs-org/cpp-cf-number)
 - [pqrs::cf::string](https://github.com/pqrs-org/cpp-cf-string)
 - [pqrs::dispatcher](https://github.com/pqrs-org/cpp-dispatcher)
